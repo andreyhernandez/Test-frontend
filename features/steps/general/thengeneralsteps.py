@@ -60,3 +60,4 @@ def step_impl(context, element_name, element_type, expression):
     assertion = transform_validation(expression)
     button_enabled = GeneralComponents.is_enabled_in_page(context, element_name)
     return assert_that(button_enabled, equal_to(assertion))
+

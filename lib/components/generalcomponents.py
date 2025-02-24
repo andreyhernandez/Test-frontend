@@ -98,12 +98,9 @@ class GeneralComponents(object):
         except TimeoutException as e:
             raise e
 
-    def wait_until_url_is(self, url, timeout=Constants.MEDIUM_WAIT):
-        error_message = f'The page not contain the {url} url after of {timeout} seconds'
-        try:
-            return WebDriverWait(self.web_driver, timeout).until(EC.url_to_be(url), error_message)
-        except TimeoutException as e:
-            raise e
+    @staticmethod
+    def wait_until_url_is(browser, url, timeout=10, error_message="URL did not match"):
+        return WebDriverWait(browser, timeout).until(EC.url_to_be(url), error_message)
 
     def wait_until_url_contains(self, contains, timeout=Constants.MEDIUM_WAIT):
         error_message = f'The url not contains {contains} after of {timeout} seconds'
@@ -269,3 +266,5 @@ class GeneralComponents(object):
         component_elements = context.current_page.get_component_elements_per_name(component_name)
         web_element = context.browser.find_element(component_elements.__dict__.get(element_name))
         return web_element.is_displayed()
+
+   
